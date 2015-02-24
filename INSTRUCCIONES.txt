@@ -1,0 +1,21 @@
+Para instalar y ejecutar LEOShell, haga lo siguiente:
+
+	1. Abra la terminal y ubíquese en la carpeta LEOShell.
+
+	2. Ejecute el siguiente comando e ingrese la contraseña de ser necesario:
+
+		$ sudo make install
+
+	3. Borre los archivos innecesarios ejecutando:
+
+		$ make clean
+		$ sudo rm -r units
+
+	4. Ejecute LEOShell escribiendo:
+
+		$ LEOShell
+
+
+Puede consultar el manual ejecutando:
+
+	$ man LEOShell

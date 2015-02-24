@@ -1,0 +1,10 @@
+[target]
+programs=LEOShell
+units=Controles Comandos
+
+[compiler]
+version=2.4.0
+
+[install]
+datadir=/usr/share/man/es/man1/
+files=Documentación/LEOShell.1
