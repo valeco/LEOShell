@@ -1,0 +1,105 @@
+.TH LEOShell 1
+
+.SH NOMBRE 
+.PP
+LEOShell - Intérprete de comandos experimental.
+ 
+Costa, Valentín - Lonardi, Diego.
+
+.SH SINOPSIS
+.PP
+LEOShell es un shell desarrollado para el trabajo final 2014, "Ampliación y mejora del shell experimental", para la cátedra de Sistemas Operativos de la Facultad Regional Concepción del Uruguay, Universidad Tecnológica Nacional.
+
+LEOShell recibe solicitudes del usuario e informa las salidas a dichas solicitudes, como tambien permite la ejecución de programas. Las funcionalidades que ofrece este Shell a través de comandos internos son: bg, cat, cd, fg, kill, ls, pwd. Permite la utilización de tuberías y redirigir la salida estándar.
+
+.SH COMANDOS Y FUNCIONALIDADES
+.B BG [PID]
+.PP
+Realiza la ejecución o detención de un proceso en
+un segundo plano.
+
+.B CAT [archivo1] [archivo2]
+.PP
+Permite la concatenación de hasta dos archivos o, en su
+defecto, con la salida estándar de un único archivo.
+
+.B CD [ruta]
+.PP
+Permite cambiar el directorio actual de trabajo según el valor introducido en ruta.
+
+Opciones:
+
+.br
+Sin ninguna opción, cambia el directorio actual de trabajo a "HOME".
+
+.TP
+\fB[ruta]\fR
+Cambia el directorio actual de trabajo a la ruta especificada.
+
+.TP
+\fB[ . ]\fR
+Mantiene el directorio actual de trabajo.
+
+.TP
+\fB[ .. ]\fR
+Cambia el directorio actual de trabajo al directorio del padre.
+
+.TP
+\fB[ - ]\fR
+Cambia el directorio actual de trabajo por el directorio anterior de trabajo.
+
+.PP
+.B LS <opción> <ruta>
+.PP
+Muestra en forma de listado la información del directorio actual de trabajo o, en su defecto, la información correspondiente a la ruta absoluta asignada.
+
+\fBOpciones: \fR
+
+.TP
+\fB\-l\fR
+Muestra en pantalla toda la información correspondiente a cada archivo: tamaño, permisos, última fecha de modificación y nombre del archivo.
+
+.TP
+\fB\-f\fR
+Muestra en pantalla los nombres correspondientes a cada archivo, incluyendo los archivos ocultos, sin color ni en orden alfabetico.
+
+.TP
+\fB\-a\fR
+Muestra en pantalla los nombres correspondientes a cada archivo, incluyendo los archivos ocultos, con color y en orden alfabetico.
+
+.PP
+.B FG [PID]
+.PP
+Realiza la ejecución en primer plano de un proceso. En el caso que no se introduzca ningún PID, por defecto se ejecutará en primer plano el último proceso (si existe) detenido en segundo plano.
+
+.B KILL [PID] [signal]
+.PP
+Este proceso recibe el PID de un proceso y una señal para ejecutarla sobrescribe el proceso correspondiente. Por defecto, kill ejecuta la señal SIGTERM.
+
+.B PWD
+.PP
+Muestra el directorio actual de trabajo.
+
+.SH REDIRECTORES
+.B [acción] > archivo.txt
+.PP
+Sobrescribe la acción asignada en el archivo destino que fue asignado. En caso de no existir el archivo, lo crea.
+
+.B [acción] >> archivo.txt
+.PP
+Concatena la acción asignada en el archivo destino que fue asignado. En caso de no existir el archivo, lo crea.
+
+.SH TUBERÍAS
+.B [acción1] | [acción2]
+.PP
+Implementa el uso de tuberías para la comunicación y sincronización entre procesos.
+
+.SH BUGS
+.PP
+La utilización de la uses "crt" realiza la salida en pantalla de forma desordenada y muy poco legible, lo que hace la solución de este bug, fuera del alcance de este Shell.
+
+.SH AUTOR
+.PP
+Costa, Valentín - yafueva@gmail.com
+.br
+Lonardi, Diego	- leandrolonardi@gmail.com
