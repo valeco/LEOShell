@@ -98,7 +98,6 @@ implementation
     procedure inicializar();
     begin
         formatoOriginal := textAttr;
-        getDir( 0, directorioActual );
         cantidadProcesos := 0;
         ultimoProceso := -1;
     end;
@@ -111,9 +110,11 @@ implementation
     procedure prompt();
     var home, usuario: string;
     begin
-        // Obtiene el directorio del home y el nombre de usuario.
+        // Obtiene el directorio del home, el nombre de usuario y el directorio
+        // actual de trabajo.
         home := fpGetEnv( 'HOME' );
         usuario := fpGetEnv( 'USER' );
+        getDir( 0, directorioActual );
 
         textColor( LightMagenta );
         write( usuario + '@' + getHostName() + ' ' );

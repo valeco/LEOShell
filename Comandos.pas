@@ -71,7 +71,8 @@ implementation
     procedure cd( argumentos: arregloStrings );
     begin
         // Si el comando no posee argumentos, cambia el directorio a home.
-        if high( argumentos ) = 0 then fpChDir( fpGetEnv( 'HOME' ) )
+        if high( argumentos ) = 0 then
+            fpChDir( fpGetEnv( 'HOME' ) )
         else
             // Si el directorio es incorrecto o el cambio no se puede efectuar,
             // muestra un mensaje.
