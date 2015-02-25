@@ -1,105 +1,83 @@
-.TH LEOShell 1
+.TH LEOShell "1" "Febrero 2015" "UTN FRCU" "Manual de usuario"
 
 .SH NOMBRE 
-.PP
-LEOShell - Intérprete de comandos experimental.
- 
-Costa, Valentín - Lonardi, Diego.
+LEOShell - Intérprete de comandos experimental
 
-.SH SINOPSIS
+.SH INTRODUCCIÓN
 .PP
-LEOShell es un shell desarrollado para el trabajo final 2014, "Ampliación y mejora del shell experimental", para la cátedra de Sistemas Operativos de la Facultad Regional Concepción del Uruguay, Universidad Tecnológica Nacional.
-
-LEOShell recibe solicitudes del usuario e informa las salidas a dichas solicitudes, como tambien permite la ejecución de programas. Las funcionalidades que ofrece este Shell a través de comandos internos son: bg, cat, cd, fg, kill, ls, pwd. Permite la utilización de tuberías y redirigir la salida estándar.
+LEOShell es un interpréte de comandos experimental desarrollado en Pascal para la cátedra Sistemas Operativos de la Universidad Tecnológica Nacional, Facultad Regional Concepción del Uruguay.
+.PP
+Su código fuente es libre y se encuentra publicado bajo la Licencia Pública General de GNU (GPL de GNU). El mismo puede descargarse desde su repositorio en GitHub:
+.IP 	https://github.com/valeco/LEOShell
 
 .SH COMANDOS Y FUNCIONALIDADES
-.B BG [PID]
-.PP
-Realiza la ejecución o detención de un proceso en
-un segundo plano.
 
-.B CAT [archivo1] [archivo2]
-.PP
-Permite la concatenación de hasta dos archivos o, en su
-defecto, con la salida estándar de un único archivo.
-
-.B CD [ruta]
-.PP
-Permite cambiar el directorio actual de trabajo según el valor introducido en ruta.
-
-Opciones:
-
-.br
-Sin ninguna opción, cambia el directorio actual de trabajo a "HOME".
+.SS Comandos internos
+.TP
+\fBcd\fR [\fIdirectorio\fR]
+Cambia el directorio actual de trabajo a \fIdirectorio\fR. Si ningún directorio es especificado, cambia al directorio home del usuario actual.
 
 .TP
-\fB[ruta]\fR
-Cambia el directorio actual de trabajo a la ruta especificada.
-
-.TP
-\fB[ . ]\fR
-Mantiene el directorio actual de trabajo.
-
-.TP
-\fB[ .. ]\fR
-Cambia el directorio actual de trabajo al directorio del padre.
-
-.TP
-\fB[ - ]\fR
-Cambia el directorio actual de trabajo por el directorio anterior de trabajo.
-
-.PP
-.B LS <opción> <ruta>
-.PP
-Muestra en forma de listado la información del directorio actual de trabajo o, en su defecto, la información correspondiente a la ruta absoluta asignada.
-
-\fBOpciones: \fR
-
-.TP
-\fB\-l\fR
-Muestra en pantalla toda la información correspondiente a cada archivo: tamaño, permisos, última fecha de modificación y nombre del archivo.
-
-.TP
-\fB\-f\fR
-Muestra en pantalla los nombres correspondientes a cada archivo, incluyendo los archivos ocultos, sin color ni en orden alfabetico.
-
-.TP
-\fB\-a\fR
-Muestra en pantalla los nombres correspondientes a cada archivo, incluyendo los archivos ocultos, con color y en orden alfabetico.
-
-.PP
-.B FG [PID]
-.PP
-Realiza la ejecución en primer plano de un proceso. En el caso que no se introduzca ningún PID, por defecto se ejecutará en primer plano el último proceso (si existe) detenido en segundo plano.
-
-.B KILL [PID] [signal]
-.PP
-Este proceso recibe el PID de un proceso y una señal para ejecutarla sobrescribe el proceso correspondiente. Por defecto, kill ejecuta la señal SIGTERM.
-
-.B PWD
-.PP
+\fBpwd\fR
 Muestra el directorio actual de trabajo.
 
-.SH REDIRECTORES
-.B [acción] > archivo.txt
-.PP
-Sobrescribe la acción asignada en el archivo destino que fue asignado. En caso de no existir el archivo, lo crea.
+.TP
+\fBcat\fR [\fIarchivo1\fR] [\fIarchivo2\fR]
+Concatena dos archivos y los muestra en la salida estándar. Si se especifica sólo un archivo, lo concatena con la salida estándar.
 
-.B [acción] >> archivo.txt
-.PP
-Concatena la acción asignada en el archivo destino que fue asignado. En caso de no existir el archivo, lo crea.
+.TP
+\fBls\fR [\fB-a\fR|\fB-f\fR|\fB-l\fR] [\fIdirectorio\fR]
+Lista los archivos y directorios de \fIdirectorio\fR. Si no se especifica directorio, listará los del directorio actual de trabajo. A continuación, se detallan las opciones:
+.IP
+\fB-a\fR Incluye archivos ocultos, con color y ordenados.
+.IP
+\fB-f\fR Incluye archivos ocultos, sin color y desordenados.
+.IP
+\fB-l\fR Con color, detalles y ordenados.
 
-.SH TUBERÍAS
-.B [acción1] | [acción2]
-.PP
-Implementa el uso de tuberías para la comunicación y sincronización entre procesos.
+.TP
+\fBkill\fR [\fIseñal\fR] \fIpid\fR
+Envía una \fIseñal\fR a un proceso identificado por \fIpid\fR. Si sólo se especifica un PID, se le envía la señal de terminación (SIGTERM).
+
+.TP
+\fBbg\fR [\fIpid\fR]
+Continúa en segundo plano la ejecución de un proceso detenido identificado por \fIpid\fR. Si no se especifica un PID, la señal es enviada al último proceso que ha sido detenido. 
+
+.TP
+\fBfg\fR [\fIpid\fR]
+Continúa en primer plano la ejecución de un proceso detenido identificado por \fIpid\fR. Si no se especifica un PID, la señal es enviada al último proceso que ha sido detenido.
+
+.TP
+\fBjobs\fR
+Muestra la lista de procesos en segundo plano, junto con su PID, comando asociado y estado actual.
+
+.SS Ejecución en segundo plano
+.TP
+\fIcomando\fR \fB&\fR
+Ejecuta \fIcomando\fR directamente en segundo plano.
+
+.SS Tuberías
+.TP
+\fIcomando1\fR \fB|\fR \fIcomando2\fR
+Conecta dos procesos mediante una tubería de manera tal que, la salida del \fIcomando1\fR es la entrada del \fIcomando2\fR.
+
+.SS Redirección
+.TP
+\fIcomando\fR \fB>\fR \fIarchivo\fR
+La salida de \fIcomando\fR es escrita en \fIarchivo\fR, sobreescribiendo el mismo. Si no existe el archivo, lo crea.
+
+.TP
+\fIcomando\fR \fB>>\fR \fIarchivo\fR
+La salida de comando es escrita en archivo, concatenando el mismo. Si no existe el archivo, lo crea.
 
 .SH BUGS
 .PP
-La utilización de la uses "crt" realiza la salida en pantalla de forma desordenada y muy poco legible, lo que hace la solución de este bug, fuera del alcance de este Shell.
-
-.SH AUTOR
+El uso de la unit \fBCRT\fR hace que los comandos externos se muestren de forma errónea en la salida estándar.
 .PP
-Costa, Valentín - yafueva@gmail.com
+El comando \fBls\fR colorea incorrectamente los nombres de los archivos si un directorio es pasado como argumento.
+
+.SH AUTORES
+.PP
++ Costa, Valentín <yafueva@gmail.com>
 .br
-Lonardi, Diego	- leandrolonardi@gmail.com
++ Lonardi, Leandro <leandrolonardi@gmail.com>
